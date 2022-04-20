@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "865143323838",
+    "project_id": "katasik-app-4d676",
+    "storage_bucket": "katasik-app-4d676.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865143323838:android:fc53022d7c4a8cabed72ef",
+        "android_client_info": {
+          "package_name": "com.example.katasik_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865143323838-eo1phsar5g7aj66fag0s8ka3m2ntfs29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaIb9HpCWN2RMndTEtzpeb8I5hw47ICXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865143323838-eo1phsar5g7aj66fag0s8ka3m2ntfs29.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "865143323838-30jtv5dc6qvj465pob6sf96hg47h6jor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cccc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
