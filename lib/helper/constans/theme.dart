@@ -20,3 +20,6 @@ const FontWeight semiBold = FontWeight.w600;
 const FontWeight bold = FontWeight.w700;
 const FontWeight extraBold = FontWeight.w800;
 const FontWeight black = FontWeight.w900;
+
+const double defaultMargin = 20.0;
+const double secondaryMargin = 30.0;
