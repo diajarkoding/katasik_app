@@ -4,8 +4,8 @@ import 'package:katasik_app/view/widgets/destination_card.dart';
 import '../../helper/constans/theme.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
-class DistanceView extends StatelessWidget {
-  const DistanceView({Key? key}) : super(key: key);
+class CalculateDistanceView extends StatelessWidget {
+  const CalculateDistanceView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

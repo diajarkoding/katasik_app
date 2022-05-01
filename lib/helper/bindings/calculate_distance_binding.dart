@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../core/viewmodel/distance_viewmodel.dart';
+import '../../core/viewmodel/calculate_distance_viewmodel.dart';
 
 class DistanceBinding extends Bindings {
   @override
