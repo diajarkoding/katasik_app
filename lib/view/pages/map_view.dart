@@ -104,7 +104,9 @@ class MapView extends GetView<MapViewModel> {
                 width: 45,
                 height: 45,
                 color: whiteColor,
-                child: Icon(Icons.my_location),
+                child: const Icon(
+                  Icons.my_location,
+                ),
               ),
             ),
           ),

@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../../helper/constans/theme.dart';
 
 class DestinationCard extends StatelessWidget {
-  const DestinationCard({Key? key}) : super(key: key);
+  final bool isDestinaionView;
+  const DestinationCard({
+    Key? key,
+    this.isDestinaionView = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +26,22 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-            bottom: 5,
-          ),
-          child: Text(
-            'Jarak 40 Km',
-            style: greenTextStyle.copyWith(
-              fontWeight: semiBold,
-            ),
-          ),
-        ),
+        isDestinaionView
+            ? const SizedBox(
+                height: 10,
+              )
+            : Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 5,
+                ),
+                child: Text(
+                  'Jarak 40 Km',
+                  style: greenTextStyle.copyWith(
+                    fontWeight: semiBold,
+                  ),
+                ),
+              ),
         Padding(
           padding: const EdgeInsets.only(bottom: 5),
           child: Text(

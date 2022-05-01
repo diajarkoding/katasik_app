@@ -3,7 +3,7 @@ abstract class Routes {
   static const mapView = '/map';
   static const calculateDistanceView = '/calculate_distance';
   static const aboutView = '/about';
-  // static const allDestinationView = '/all_destination';
+  static const destinationView = '/destination';
   // static const detailView = '/detail';
   // static const splashView = '/splash';
 }

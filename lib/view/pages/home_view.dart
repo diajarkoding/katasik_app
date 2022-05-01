@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:katasik_app/helper/routes/route_name.dart';
 import 'package:katasik_app/view/widgets/destination_carousel_card.dart';
 
 import '../../helper/constans/theme.dart';
@@ -157,10 +159,15 @@ class HomeView extends StatelessWidget {
                   fontWeight: semiBold,
                 ),
               ),
-              Text(
-                'Lihat Semua',
-                style: greyTextStyle.copyWith(
-                  fontWeight: semiBold,
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.destinationView);
+                },
+                child: Text(
+                  'Lihat Semua',
+                  style: greyTextStyle.copyWith(
+                    fontWeight: semiBold,
+                  ),
                 ),
               ),
             ],

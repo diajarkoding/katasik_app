@@ -126,7 +126,7 @@ class CalculateDistanceView extends StatelessWidget {
               childAspectRatio: 0.5,
               crossAxisSpacing: 18,
             ),
-            children: [
+            children: const [
               DestinationCard(),
               DestinationCard(),
               DestinationCard(),
