@@ -25,6 +25,29 @@ class DestinationCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: const EdgeInsets.only(
+                left: 10,
+                bottom: 10,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 11,
+                vertical: 3,
+              ),
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Text(
+                'Sungai',
+                style: blackTextStyle.copyWith(
+                  fontSize: 11,
+                ),
+              ),
+            ),
+          ),
         ),
         isDestinaionView
             ? const SizedBox(
