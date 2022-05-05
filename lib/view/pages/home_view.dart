@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:katasik_app/core/viewmodel/home_viewmodel.dart';
 import 'package:katasik_app/helper/routes/route_name.dart';
 import 'package:katasik_app/view/widgets/destination_carousel_card.dart';
-
 import '../../helper/constans/theme.dart';
 import '../widgets/categories_card.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -173,22 +173,63 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              const SizedBox(
-                width: defaultMargin,
-              ),
-              Row(
-                children: const [
-                  DestinationCarouselCard(),
-                  DestinationCarouselCard(),
-                ],
-              ),
-            ],
+        GetBuilder(
+          init: Get.find<HomeViewModel>(),
+          builder: (_) => SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: defaultMargin,
+                ),
+                Row(
+                  children: controller.destinations
+                      .map(
+                        (e) => DestinationCarouselCard(
+                          destinations: e,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
           ),
         ),
+        // FutureBuilder<QuerySnapshot<Object?>>(
+        //     future: Database().fetchTest(),
+        //     builder: (context, snapshot) {
+        //       if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return const Center(
+        //           child: CircularProgressIndicator(),
+        //         );
+        //       }
+        //       if (snapshot.hasData) {
+        //         List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
+        //         var test = data[0]['data'];
+        //         return Text(test);
+        //         // return SingleChildScrollView(
+        //         //   scrollDirection: Axis.horizontal,
+        //         //   child: Row(
+        //         //     children: [
+        //         //       const SizedBox(
+        //         //         width: defaultMargin,
+        //         //       ),
+        //         //       Row(
+        //         //         children: snapshot.data!
+        //         //             .map(
+        //         //               (e) => DestinationCarouselCard(
+        //         //                 destinations: e,
+        //         //               ),
+        //         //             )
+        //         //             .toList(),
+        //         //       ),
+        //         //     ],
+        //         //   ),
+        //         // );
+        //       } else {
+        //         return SizedBox();
+        //       }
+        //     }),
         const SizedBox(
           height: 30,
         ),

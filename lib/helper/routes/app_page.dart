@@ -5,6 +5,7 @@ import 'package:katasik_app/helper/bindings/destination_binding.dart';
 import 'package:katasik_app/view/pages/about_view.dart';
 import 'package:katasik_app/view/pages/calculate_distance_view.dart';
 import 'package:katasik_app/view/pages/destination_view.dart';
+import 'package:katasik_app/view/pages/detail_destination_view.dart';
 import 'package:katasik_app/view/pages/home_view.dart';
 import 'package:katasik_app/view/pages/map_view.dart';
 
@@ -48,10 +49,10 @@ class AppPages {
     //   page: () => SplashPage(),
     //   binding: SplashBinding(),
     // ),
-    // GetPage(
-    //   name: Routes.detailPage,
-    //   page: () =>  DetailPage(destinasi: ,),
-    //   binding: HomeBinding(),
-    // ),
+    GetPage(
+      name: Routes.detailDestinationView,
+      page: () => const DetailDestinaionView(),
+      // binding: HomeBinding(),
+    ),
   ];
 }

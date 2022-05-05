@@ -1,4 +1,5 @@
 class DestinationModel {
+  final String id;
   final String name;
   final String category;
   final String image;
@@ -7,11 +8,13 @@ class DestinationModel {
   final String description;
   final List photos;
   final List facility;
-  // final List kontak;
+  final Map contact;
   final double longitude;
   final double latitude;
 
   DestinationModel({
+    required this.id,
+    required this.contact,
     // required this.kontak,
     required this.longitude,
     required this.latitude,
@@ -25,8 +28,9 @@ class DestinationModel {
     required this.address,
   });
 
-  factory DestinationModel.fromJson(Map<String, dynamic> json) =>
+  factory DestinationModel.fromJson(String id, Map<String, dynamic> json) =>
       DestinationModel(
+        id: id,
         longitude: json['longitude'],
         latitude: json['latitude'],
         description: json['description'],
@@ -36,6 +40,7 @@ class DestinationModel {
         category: json['category'],
         image: json['image'],
         address: json['address'],
+        contact: json['contact'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,5 +53,6 @@ class DestinationModel {
         'name': name,
         'image': image,
         'address': address,
+        'contact': contact,
       };
 }

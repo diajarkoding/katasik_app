@@ -12,6 +12,7 @@ class AboutView extends GetView<AboutViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
