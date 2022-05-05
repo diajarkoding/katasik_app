@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
 
+import '../../core/viewmodel/destination_viewmodel.dart';
 import '../widgets/destination_card.dart';
 
-class DestinationView extends StatelessWidget {
+class DestinationView extends GetView<DestinationViewModel> {
   const DestinationView({Key? key}) : super(key: key);
 
   @override
@@ -103,6 +104,9 @@ class DestinationView extends StatelessWidget {
             ),
             Expanded(
               child: TextField(
+                onChanged: (value) => controller.filterDestination(
+                  value,
+                ),
                 decoration: InputDecoration.collapsed(
                   hintText: 'Cari Wisata',
                   hintStyle: greyTextStyle.copyWith(fontWeight: medium),
@@ -122,32 +126,42 @@ class DestinationView extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GridView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: defaultMargin,
+          Obx(
+            () => GridView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.57,
+                crossAxisSpacing: 18,
+              ),
+              children: controller.foundDestinasi.value
+                  .map(
+                    (e) => DestinationCard(
+                      isDestinaionView: true,
+                      destination: e,
+                    ),
+                  )
+                  .toList(),
+              //  const [
+              //   DestinationCard(
+              //     isDestinaionView: true,
+              //   ),
+              //   DestinationCard(
+              //     isDestinaionView: true,
+              //   ),
+              //   DestinationCard(
+              //     isDestinaionView: true,
+              //   ),
+              //   DestinationCard(
+              //     isDestinaionView: true,
+              //   ),
+              // ],
             ),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.56,
-              crossAxisSpacing: 18,
-            ),
-            children: const [
-              DestinationCard(
-                isDestinaionView: true,
-              ),
-              DestinationCard(
-                isDestinaionView: true,
-              ),
-              DestinationCard(
-                isDestinaionView: true,
-              ),
-              DestinationCard(
-                isDestinaionView: true,
-              ),
-            ],
-          )
+          ),
         ],
       );
     }

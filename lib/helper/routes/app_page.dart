@@ -1,15 +1,14 @@
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/bindings/about_binding.dart';
-import 'package:katasik_app/helper/bindings/calculate_distance_binding.dart';
+import 'package:katasik_app/helper/bindings/distance_destination_binding.dart';
 import 'package:katasik_app/helper/bindings/destination_binding.dart';
 import 'package:katasik_app/view/pages/about_view.dart';
-import 'package:katasik_app/view/pages/calculate_distance_view.dart';
+import 'package:katasik_app/view/pages/distance_destination_view.dart';
 import 'package:katasik_app/view/pages/destination_view.dart';
-import 'package:katasik_app/view/pages/detail_destination_view.dart';
 import 'package:katasik_app/view/pages/home_view.dart';
 import 'package:katasik_app/view/pages/map_view.dart';
 
-import '../bindings/home_binding.dart';
+import '../bindings/destination_binding.dart';
 import '../bindings/map_binding.dart';
 import 'route_name.dart';
 
@@ -19,7 +18,7 @@ class AppPages {
       name: Routes.homeView,
       page: () => const HomeView(),
       transition: Transition.fadeIn,
-      binding: HomeBinding(),
+      binding: DestinationBinding(),
     ),
     GetPage(
       name: Routes.mapView,
@@ -29,9 +28,12 @@ class AppPages {
     ),
     GetPage(
       name: Routes.calculateDistanceView,
-      page: () => const CalculateDistanceView(),
+      page: () => const DistanceDestinationView(),
       transition: Transition.fadeIn,
-      binding: DistanceBinding(),
+      bindings: [
+        DistanceDestinationBinding(),
+        DestinationBinding(),
+      ],
     ),
     GetPage(
       name: Routes.aboutView,
@@ -42,17 +44,19 @@ class AppPages {
     GetPage(
       name: Routes.destinationView,
       page: () => const DestinationView(),
-      binding: DestinationBinding(),
+      bindings: [
+        DestinationBinding(),
+      ],
     ),
     // GetPage(
     //   name: Routes.splashPage,
     //   page: () => SplashPage(),
     //   binding: SplashBinding(),
     // ),
-    GetPage(
-      name: Routes.detailDestinationView,
-      page: () => const DetailDestinaionView(),
-      // binding: HomeBinding(),
-    ),
+    // GetPage(
+    //   name: Routes.detailDestinationView,
+    //   page: () => const DetailDestinaionView(),
+    //   // binding: DestinationBinding(),
+    // ),
   ];
 }

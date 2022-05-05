@@ -12,18 +12,28 @@ class MapView extends GetView<MapViewModel> {
   @override
   Widget build(BuildContext context) {
     Widget mapView() {
-      return GoogleMap(
-        initialCameraPosition: controller.initialLocation,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: false,
-        mapType: MapType.normal,
-        // markers: mapC.listLatLang
-        //     .map((e) => mapC.customMarker(e['position'], e['title']))
-        //     .toSet(),
-        zoomGesturesEnabled: true,
-        zoomControlsEnabled: false,
-        onMapCreated: (GoogleMapController googleMapController) {
-          controller.mapController = googleMapController;
+      return GetBuilder<MapViewModel>(
+        init: Get.find<MapViewModel>(),
+        builder: (_) {
+          return GoogleMap(
+            initialCameraPosition: controller.initialLocation,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false,
+            mapType: MapType.normal,
+            markers: controller.listLatLang
+                .map(
+                  (e) => controller.customMarker(
+                    e['position'],
+                    e['title'],
+                  ),
+                )
+                .toSet(),
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: false,
+            onMapCreated: (GoogleMapController googleMapController) {
+              controller.mapController = googleMapController;
+            },
+          );
         },
       );
     }

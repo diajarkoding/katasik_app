@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:katasik_app/core/viewmodel/distance_destination_viewmodel.dart';
 import 'package:katasik_app/view/widgets/destination_card.dart';
-
+import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
-class CalculateDistanceView extends StatelessWidget {
-  const CalculateDistanceView({Key? key}) : super(key: key);
+class DistanceDestinationView extends GetView<DestinationViewModel> {
+  const DistanceDestinationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +43,16 @@ class CalculateDistanceView extends StatelessWidget {
                   width: 3,
                 ),
                 Expanded(
-                  child: Text(
-                    'Madewangi Setiamulya tamansari tasikmalaya jawa barat',
-                    style: greenTextStyle.copyWith(fontSize: 12),
-                    overflow: TextOverflow.ellipsis,
+                  child: GetBuilder<DistanceDestinationViewModel>(
+                    init: Get.find<DistanceDestinationViewModel>(),
+                    // initState: (_) {},
+                    builder: (controller) {
+                      return Text(
+                        controller.address!,
+                        style: greenTextStyle.copyWith(fontSize: 12),
+                        overflow: TextOverflow.ellipsis,
+                      );
+                    },
                   ),
                 )
               ],
@@ -83,6 +91,9 @@ class CalculateDistanceView extends StatelessWidget {
             ),
             Expanded(
               child: TextField(
+                onChanged: (value) => controller.filterDestination(
+                  value,
+                ),
                 decoration: InputDecoration.collapsed(
                   hintText: 'Cari Wisata',
                   hintStyle: greyTextStyle.copyWith(fontWeight: medium),
@@ -115,24 +126,33 @@ class CalculateDistanceView extends StatelessWidget {
               ),
             ),
           ),
-          GridView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: defaultMargin,
+          Obx(
+            () => GridView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.51,
+                crossAxisSpacing: 18,
+              ),
+              children: controller.foundDestinasi.value
+                  .map(
+                    (e) => DestinationCard(
+                      destination: e,
+                    ),
+                  )
+                  .toList(),
+              // const [
+              //   // DestinationCard(),
+              //   // DestinationCard(),
+              //   // DestinationCard(),
+              //   // DestinationCard(),
+              // ],
             ),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.5,
-              crossAxisSpacing: 18,
-            ),
-            children: const [
-              DestinationCard(),
-              DestinationCard(),
-              DestinationCard(),
-              DestinationCard(),
-            ],
-          )
+          ),
         ],
       );
     }

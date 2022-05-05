@@ -3,22 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
-
-import '../../helper/routes/route_name.dart';
+import 'package:katasik_app/view/pages/detail_destination_view.dart';
 import '../../model/destination_model.dart';
 
 class DestinationCarouselCard extends StatelessWidget {
-  DestinationModel destinations;
+  DestinationModel destination;
   DestinationCarouselCard({
     Key? key,
-    required this.destinations,
+    required this.destination,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(
-        Routes.detailDestinationView,
+      onTap: () => Get.to(
+        () => DetailDestinaionView(
+          destination: destination,
+        ),
       ),
       child: Stack(
         children: [
@@ -31,7 +32,7 @@ class DestinationCarouselCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                image: NetworkImage(destinations.image),
+                image: NetworkImage(destination.image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -66,7 +67,7 @@ class DestinationCarouselCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Text(
-                    destinations.category,
+                    destination.category,
                     style: blackTextStyle.copyWith(fontWeight: light),
                   ),
                 ),
@@ -79,12 +80,12 @@ class DestinationCarouselCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        destinations.name,
+                        destination.name,
                         style: whiteTextStyle.copyWith(
                             fontSize: 18, fontWeight: semiBold),
                       ),
                       Text(
-                        destinations.address,
+                        destination.address,
                         style: whiteTextStyle.copyWith(
                           fontWeight: light,
                         ),

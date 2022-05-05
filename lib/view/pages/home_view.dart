@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:katasik_app/core/viewmodel/home_viewmodel.dart';
 import 'package:katasik_app/helper/routes/route_name.dart';
 import 'package:katasik_app/view/widgets/destination_carousel_card.dart';
+import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
 import '../widgets/categories_card.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
-class HomeView extends GetView<HomeViewModel> {
+class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -173,9 +173,9 @@ class HomeView extends GetView<HomeViewModel> {
             ],
           ),
         ),
-        GetBuilder(
-          init: Get.find<HomeViewModel>(),
-          builder: (_) => SingleChildScrollView(
+        GetBuilder<DestinationViewModel>(
+          init: Get.find<DestinationViewModel>(),
+          builder: (controller) => SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -186,7 +186,7 @@ class HomeView extends GetView<HomeViewModel> {
                   children: controller.destinations
                       .map(
                         (e) => DestinationCarouselCard(
-                          destinations: e,
+                          destination: e,
                         ),
                       )
                       .toList(),

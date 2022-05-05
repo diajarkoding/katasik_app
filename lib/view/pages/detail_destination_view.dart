@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
+import 'package:katasik_app/model/destination_model.dart';
 import 'package:katasik_app/view/widgets/facility_item.dart';
 import 'package:katasik_app/view/widgets/photos_item.dart';
 
 class DetailDestinaionView extends StatelessWidget {
-  const DetailDestinaionView({Key? key}) : super(key: key);
+  final DestinationModel destination;
+  const DetailDestinaionView({
+    Key? key,
+    required this.destination,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // List Marker
+    List<Marker> _marker = [
+      Marker(
+        markerId: MarkerId(destination.name),
+        position: LatLng(destination.latitude, destination.longitude),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      )
+    ];
+
     Widget backgroundImage() {
       return Container(
         width: double.infinity,
         height: 400,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
-                'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
+                destination.image,
               ),
               fit: BoxFit.cover),
         ),
@@ -55,14 +69,14 @@ class DetailDestinaionView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Curug Panetean',
+              destination.name,
               style: whiteTextStyle.copyWith(
                 fontSize: 24,
                 fontWeight: semiBold,
               ),
             ),
             Text(
-              'Pangliaran, Pancatengah, Kab. Tasikmalay',
+              destination.address,
               style: whiteTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: light,
@@ -88,7 +102,7 @@ class DetailDestinaionView extends StatelessWidget {
               height: 6,
             ),
             Text(
-              'Curug Panetean Tasikmalaya merupakan curug yang memiliki pemandangan indah berupa bebatuan keren serta memiliki air yang sangat jernih. Curug Panetean ini juga sering disebut Curug Leuwi oleh masyarakat sekitar, karena leuwi sendiri memiliki artian dalam bahasa sunda adalah cekungan dasar air, di curug ini selain memiliki air yang jernih juga airnya yang menenangkan cocok untuk dijadikan sebagai tempat berenang.',
+              destination.description,
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
               textAlign: TextAlign.justify,
             ),
@@ -123,20 +137,28 @@ class DetailDestinaionView extends StatelessWidget {
                   width: 20,
                 ),
                 Row(
-                  children: const [
-                    PhotosItem(
-                      imageUrl:
-                          'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                    ),
-                    PhotosItem(
-                      imageUrl:
-                          'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                    ),
-                    PhotosItem(
-                      imageUrl:
-                          'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                    ),
-                  ],
+                  children: destination.photos
+                      .map(
+                        (e) => PhotosItem(
+                          imageUrl: e,
+                        ),
+                      )
+                      .toList(),
+
+                  //  const [
+                  //   PhotosItem(
+                  //     imageUrl:
+                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
+                  //   ),
+                  //   PhotosItem(
+                  //     imageUrl:
+                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
+                  //   ),
+                  //   PhotosItem(
+                  //     imageUrl:
+                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
+                  //   ),
+                  // ],
                 ),
               ],
             ),
@@ -167,11 +189,18 @@ class DetailDestinaionView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 20),
               child: Column(
-                children: const [
-                  FacilityItem(
-                    text: 'Spot foto',
-                  ),
-                ],
+                children: destination.facility
+                    .map(
+                      (e) => FacilityItem(
+                        text: e,
+                      ),
+                    )
+                    .toList(),
+                // const [
+                //   FacilityItem(
+                //     text: 'Spot foto',
+                //   ),
+                // ],
               ),
             ),
           ],
@@ -193,16 +222,16 @@ class DetailDestinaionView extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const SizedBox(
+            SizedBox(
               height: 250,
               width: double.infinity,
               child: GoogleMap(
                 mapType: MapType.normal,
-                // markers: _marker.toSet(),
+                markers: _marker.toSet(),
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
-                    -7.7458324,
-                    108.2524236,
+                    destination.latitude,
+                    destination.longitude,
                   ),
                   zoom: 10,
                 ),
@@ -381,6 +410,7 @@ class DetailDestinaionView extends StatelessWidget {
 
     Widget content() {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           nameAndAddress(),
           Container(
