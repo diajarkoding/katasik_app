@@ -123,46 +123,30 @@ class DestinationView extends GetView<DestinationViewModel> {
     }
 
     Widget gridViewDestinations() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Obx(
-            () => GridView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultMargin,
-              ),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.57,
-                crossAxisSpacing: 18,
-              ),
-              children: controller.foundDestinasi.value
-                  .map(
-                    (e) => DestinationCard(
-                      isDestinaionView: true,
-                      destination: e,
-                    ),
-                  )
-                  .toList(),
-              //  const [
-              //   DestinationCard(
-              //     isDestinaionView: true,
-              //   ),
-              //   DestinationCard(
-              //     isDestinaionView: true,
-              //   ),
-              //   DestinationCard(
-              //     isDestinaionView: true,
-              //   ),
-              //   DestinationCard(
-              //     isDestinaionView: true,
-              //   ),
-              // ],
+      return GetBuilder<DestinationViewModel>(
+        init: Get.find<DestinationViewModel>(),
+        builder: (_) {
+          return GridView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultMargin,
             ),
-          ),
-        ],
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.57,
+              crossAxisSpacing: 18,
+            ),
+            children: controller.foundDestination
+                .map(
+                  (e) => DestinationCard(
+                    isDestinaionView: true,
+                    destination: e,
+                  ),
+                )
+                .toList(),
+          );
+        },
       );
     }
 

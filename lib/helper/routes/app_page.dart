@@ -27,12 +27,12 @@ class AppPages {
       binding: MapBinding(),
     ),
     GetPage(
-      name: Routes.calculateDistanceView,
+      name: Routes.distanceDestinationView,
       page: () => const DistanceDestinationView(),
       transition: Transition.fadeIn,
       bindings: [
-        DistanceDestinationBinding(),
         DestinationBinding(),
+        DistanceDestinationBinding(),
       ],
     ),
     GetPage(

@@ -144,21 +144,6 @@ class DetailDestinaionView extends StatelessWidget {
                         ),
                       )
                       .toList(),
-
-                  //  const [
-                  //   PhotosItem(
-                  //     imageUrl:
-                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                  //   ),
-                  //   PhotosItem(
-                  //     imageUrl:
-                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                  //   ),
-                  //   PhotosItem(
-                  //     imageUrl:
-                  //         'https://lh5.googleusercontent.com/p/AF1QipNXQdCCsvauH2TJsu5gzwGDEp7c6U20Dbnoakp2=w529-h298-k-no',
-                  //   ),
-                  // ],
                 ),
               ],
             ),
@@ -196,11 +181,6 @@ class DetailDestinaionView extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                // const [
-                //   FacilityItem(
-                //     text: 'Spot foto',
-                //   ),
-                // ],
               ),
             ),
           ],
@@ -248,9 +228,7 @@ class DetailDestinaionView extends StatelessWidget {
     Widget mapButton() {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 21),
-        // width: 100,
         height: 55,
-        // margin: const EdgeInsets.symmetric(horizontal: 20),
         child: TextButton(
           style: TextButton.styleFrom(
             backgroundColor: greenColor,
@@ -292,7 +270,6 @@ class DetailDestinaionView extends StatelessWidget {
         ),
         child: Divider(
           thickness: 1,
-          // color: greyColor,
         ),
       );
     }

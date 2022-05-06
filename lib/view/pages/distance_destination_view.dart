@@ -109,7 +109,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
       );
     }
 
-    Widget destinations() {
+    Widget gridViewDistanceDestinations() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -126,32 +126,29 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
               ),
             ),
           ),
-          Obx(
-            () => GridView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultMargin,
-              ),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.51,
-                crossAxisSpacing: 18,
-              ),
-              children: controller.foundDestinasi.value
-                  .map(
-                    (e) => DestinationCard(
-                      destination: e,
-                    ),
-                  )
-                  .toList(),
-              // const [
-              //   // DestinationCard(),
-              //   // DestinationCard(),
-              //   // DestinationCard(),
-              //   // DestinationCard(),
-              // ],
-            ),
+          GetBuilder<DestinationViewModel>(
+            init: Get.find<DestinationViewModel>(),
+            builder: (_) {
+              return GridView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: defaultMargin,
+                ),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.51,
+                  crossAxisSpacing: 18,
+                ),
+                children: controller.foundDestination
+                    .map(
+                      (e) => DestinationCard(
+                        destination: e,
+                      ),
+                    )
+                    .toList(),
+              );
+            },
           ),
         ],
       );
@@ -165,7 +162,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
             children: [
               address(),
               search(),
-              destinations(),
+              gridViewDistanceDestinations(),
             ],
           ),
         ),

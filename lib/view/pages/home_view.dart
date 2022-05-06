@@ -195,41 +195,6 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
-        // FutureBuilder<QuerySnapshot<Object?>>(
-        //     future: Database().fetchTest(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return const Center(
-        //           child: CircularProgressIndicator(),
-        //         );
-        //       }
-        //       if (snapshot.hasData) {
-        //         List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
-        //         var test = data[0]['data'];
-        //         return Text(test);
-        //         // return SingleChildScrollView(
-        //         //   scrollDirection: Axis.horizontal,
-        //         //   child: Row(
-        //         //     children: [
-        //         //       const SizedBox(
-        //         //         width: defaultMargin,
-        //         //       ),
-        //         //       Row(
-        //         //         children: snapshot.data!
-        //         //             .map(
-        //         //               (e) => DestinationCarouselCard(
-        //         //                 destinations: e,
-        //         //               ),
-        //         //             )
-        //         //             .toList(),
-        //         //       ),
-        //         //     ],
-        //         //   ),
-        //         // );
-        //       } else {
-        //         return SizedBox();
-        //       }
-        //     }),
         const SizedBox(
           height: 30,
         ),

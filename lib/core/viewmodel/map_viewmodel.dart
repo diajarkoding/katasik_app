@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -22,8 +24,8 @@ class MapViewModel extends GetxController {
     await Geolocator.requestPermission();
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
-      // currentPosition = position;
-      // print('CURRENT POS: $currentPosition');
+      currentPosition = position;
+      print('CURRENT POS: $currentPosition');
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(

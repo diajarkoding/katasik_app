@@ -6,14 +6,16 @@ import '../services/database.dart';
 
 class DestinationViewModel extends GetxController {
   final List<DestinationModel> _destinations = [];
-  final Rx<List<DestinationModel>> _foundDestinasi =
-      Rx<List<DestinationModel>>([]);
+  List<DestinationModel> _foundDestination = [];
 
   List<DestinationModel> get destinations => _destinations;
-  Rx<List<DestinationModel>> get foundDestinasi => _foundDestinasi;
+  List<DestinationModel> get foundDestination => _foundDestination;
 
-  _getDestinations() async {
-    // _loading = true;
+  set setFoundDestination(List<DestinationModel> value) {
+    _foundDestination = value;
+  }
+
+  Future<void> _getDestinations() async {
     List<QueryDocumentSnapshot> destinationsSnapshot =
         await Database().fetchDestinations();
     for (var destination in destinationsSnapshot) {
@@ -22,7 +24,6 @@ class DestinationViewModel extends GetxController {
             destination.id, destination.data() as Map<String, dynamic>),
       );
     }
-    // _loading = false;
     update();
   }
 
@@ -39,13 +40,15 @@ class DestinationViewModel extends GetxController {
           )
           .toList();
     }
-    foundDestinasi.value = results;
+
+    setFoundDestination = results;
+    update();
   }
 
   @override
   void onInit() {
     _getDestinations();
-    foundDestinasi.value = destinations;
+    setFoundDestination = destinations;
     super.onInit();
   }
 }
