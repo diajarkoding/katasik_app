@@ -16,16 +16,20 @@ class MapViewModel extends GetxController {
 
   final CameraPosition initialLocation = const CameraPosition(
     target: LatLng(-7.4441451, 108.0759115),
-    // target: LatLng(-7.3601468, 108.1706082),
     zoom: 9.7,
   );
 
-  _getCurrentLocation() async {
+  Future<void> _getCurrentLocation() async {
+    // Request Permission Location
     await Geolocator.requestPermission();
+
+    // Get Location / Position
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       currentPosition = position;
       print('CURRENT POS: $currentPosition');
+
+      // Update Camera Position
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -48,17 +52,17 @@ class MapViewModel extends GetxController {
     );
   }
 
-  addLatLang() async {
+  Future<void> addLatLang() async {
     // Get data from firestore
     List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
-        await Database().fetchDestinations();
+        await Database().fetchDestinations;
 
     // Convert / Parsing JSON destinationSnapshot to DestinationModel
     var destinations = destinationSnapshot.map(
       (e) => DestinationModel.fromJson(e.id, e.data() as Map<String, dynamic>),
     );
 
-    // add latitude, longitude from destinations to listLatLang
+    // add latitude and longitude from destinations to listLatLang
     for (var value in destinations) {
       LatLng latLang = LatLng(value.latitude, value.longitude);
       String title = value.name;

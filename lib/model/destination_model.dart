@@ -1,9 +1,10 @@
+import 'dart:math';
+
 class DestinationModel {
   final String id;
   final String name;
   final String category;
   final String image;
-  // final String jarak;
   final String address;
   final String description;
   final List photos;
@@ -11,11 +12,12 @@ class DestinationModel {
   final Map contact;
   final double longitude;
   final double latitude;
+  final double distance;
 
   DestinationModel({
     required this.id,
     required this.contact,
-    // required this.kontak,
+    required this.distance,
     required this.longitude,
     required this.latitude,
     required this.description,
@@ -24,7 +26,6 @@ class DestinationModel {
     required this.name,
     required this.category,
     required this.image,
-    // required this.jarak,
     required this.address,
   });
 
@@ -41,9 +42,11 @@ class DestinationModel {
         image: json['image'],
         address: json['address'],
         contact: json['contact'],
+        distance: json['distance'],
       );
 
   Map<String, dynamic> toJson() => {
+        'distance': distance,
         'longitude': longitude,
         'latitude': latitude,
         'description': description,
@@ -55,4 +58,29 @@ class DestinationModel {
         'address': address,
         'contact': contact,
       };
+
+  static double distanceBetween(
+    double startLatitude,
+    double startLongitude,
+    double endLatitude,
+    double endLongitude,
+  ) {
+    double earthRadius = 6378137.0;
+
+    var dLat = _toRadians(endLatitude - startLatitude);
+
+    var dLon = _toRadians(endLongitude - startLongitude);
+
+    var x =
+        (dLon) * cos((_toRadians(startLatitude) + _toRadians(endLatitude)) / 2);
+    var y = dLat;
+
+    var d = sqrt((x * x) + (y * y)) * earthRadius;
+
+    return d;
+  }
+
+  static _toRadians(double degree) {
+    return degree * pi / 180;
+  }
 }

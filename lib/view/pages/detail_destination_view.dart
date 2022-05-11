@@ -420,6 +420,7 @@ class DetailDestinaionView extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Stack(
           children: [

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/bindings/about_binding.dart';
-import 'package:katasik_app/helper/bindings/distance_destination_binding.dart';
 import 'package:katasik_app/helper/bindings/destination_binding.dart';
 import 'package:katasik_app/view/pages/about_view.dart';
 import 'package:katasik_app/view/pages/distance_destination_view.dart';
@@ -32,7 +31,6 @@ class AppPages {
       transition: Transition.fadeIn,
       bindings: [
         DestinationBinding(),
-        DistanceDestinationBinding(),
       ],
     ),
     GetPage(
@@ -48,15 +46,5 @@ class AppPages {
         DestinationBinding(),
       ],
     ),
-    // GetPage(
-    //   name: Routes.splashPage,
-    //   page: () => SplashPage(),
-    //   binding: SplashBinding(),
-    // ),
-    // GetPage(
-    //   name: Routes.detailDestinationView,
-    //   page: () => const DetailDestinaionView(),
-    //   // binding: DestinationBinding(),
-    // ),
   ];
 }

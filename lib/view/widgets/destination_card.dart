@@ -8,15 +8,18 @@ import '../../helper/constans/theme.dart';
 class DestinationCard extends StatelessWidget {
   final DestinationModel destination;
   final bool isDestinaionView;
+  // final String text;
 
   const DestinationCard({
     Key? key,
     this.isDestinaionView = false,
+    // this.text = 'Jarak 0 Km',
     required this.destination,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final controller = Get.put(DistanceDestinationViewModel());
     return InkWell(
       onTap: () => Get.to(
         () => DetailDestinaionView(
@@ -27,7 +30,6 @@ class DestinationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // width: 150,
             height: 130,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -70,7 +72,7 @@ class DestinationCard extends StatelessWidget {
                     bottom: 5,
                   ),
                   child: Text(
-                    'Jarak 40 Km',
+                    'Jarak ${destination.distance.toStringAsFixed(0)} Km',
                     style: greenTextStyle.copyWith(
                       fontWeight: semiBold,
                     ),

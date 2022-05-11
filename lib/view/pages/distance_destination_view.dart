@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:katasik_app/core/viewmodel/distance_destination_viewmodel.dart';
 import 'package:katasik_app/view/widgets/destination_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
@@ -43,18 +42,14 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                   width: 3,
                 ),
                 Expanded(
-                  child: GetBuilder<DistanceDestinationViewModel>(
-                    init: Get.find<DistanceDestinationViewModel>(),
-                    // initState: (_) {},
-                    builder: (controller) {
-                      return Text(
-                        controller.address!,
-                        style: greenTextStyle.copyWith(fontSize: 12),
-                        overflow: TextOverflow.ellipsis,
-                      );
-                    },
+                  child: Obx(
+                    () => Text(
+                      controller.address!.value,
+                      style: greenTextStyle.copyWith(fontSize: 12),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                )
+                ),
               ],
             )
           ],
@@ -155,6 +150,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

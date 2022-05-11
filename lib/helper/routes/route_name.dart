@@ -5,5 +5,4 @@ abstract class Routes {
   static const aboutView = '/about';
   static const destinationView = '/destination';
   static const detailDestinationView = '/detail_destination';
-  // static const splashView = '/splash';
 }

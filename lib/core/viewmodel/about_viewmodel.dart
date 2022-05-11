@@ -9,6 +9,7 @@ class AboutViewModel extends GetxController {
         await launch(
           url,
           // Webview in flutter
+
           // forceSafariVC: true,
           // forceWebView: true,
           // enableJavaScript: true,
