@@ -45,7 +45,9 @@ class MapViewModel extends GetxController {
 
   Marker customMarker(LatLng e, String title) {
     return Marker(
-      markerId: MarkerId(e.hashCode.toString()),
+      markerId: MarkerId(
+        e.hashCode.toString(),
+      ),
       position: e,
       infoWindow: InfoWindow(title: title),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
@@ -55,7 +57,7 @@ class MapViewModel extends GetxController {
   Future<void> addLatLang() async {
     // Get data from firestore
     List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
-        await Database().fetchDestinations;
+        await Database.fetchDestinations;
 
     // Convert / Parsing JSON destinationSnapshot to DestinationModel
     var destinations = destinationSnapshot.map(

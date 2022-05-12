@@ -36,7 +36,7 @@ class DestinationViewModel extends GetxController {
 
     // Fetching data from cloud firestore
     List<QueryDocumentSnapshot> destinationsSnapshot =
-        await Database().fetchDestinations;
+        await Database.fetchDestinations;
 
     // Looping destinationsSnapshot
     for (var destination in destinationsSnapshot) {
@@ -128,7 +128,7 @@ class DestinationViewModel extends GetxController {
 
       // Get data from firestore
       List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
-          await Database().fetchDestinations;
+          await Database.fetchDestinations;
 
       // Parsing JSON destinationSnapshot
       var destinations = destinationSnapshot.map(
@@ -145,7 +145,7 @@ class DestinationViewModel extends GetxController {
 
         double distance = result / 1000;
 
-        Database().destionationRef.doc(value.id).update({
+        Database.destionationRef.doc(value.id).update({
           'distance': distance,
         });
       }
