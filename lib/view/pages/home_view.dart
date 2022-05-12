@@ -162,25 +162,29 @@ class HomeView extends StatelessWidget {
           ),
           GetBuilder<DestinationViewModel>(
             init: Get.find<DestinationViewModel>(),
-            builder: (controller) => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: defaultMargin,
+            builder: (controller) => controller.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: defaultMargin,
+                        ),
+                        Row(
+                          children: controller.destinations
+                              .map(
+                                (e) => DestinationCarouselCard(
+                                  destination: e,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: controller.destinations
-                        .map(
-                          (e) => DestinationCarouselCard(
-                            destination: e,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ],
-              ),
-            ),
           ),
           const SizedBox(
             height: 30,

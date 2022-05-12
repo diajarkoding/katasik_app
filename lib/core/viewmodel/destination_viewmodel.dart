@@ -13,23 +13,27 @@ class DestinationViewModel extends GetxController {
 
   final RxString? _address = RxString('');
 
+  bool _isLoading = false;
+
+  final RxBool _loading = false.obs;
+
+  bool get isLoading => _isLoading;
+
+  RxBool get loading => _loading;
+
   RxString? get address => _address;
 
   List<DestinationModel> get destinations => _destinations;
 
   List<DestinationModel> get foundDestination => _foundDestination;
 
-  Future<Position> get getCurrentLocation => _getCurrentPosition();
-
-  Future<void> get getAddress => _getAddress();
-
-  Future<void> get distanceInKm => _distanceInKm();
-
   set setFoundDestination(List<DestinationModel> value) {
     _foundDestination = value;
   }
 
   Future<void> _getDestinations() async {
+    _isLoading = true;
+
     // Fetching data from cloud firestore
     List<QueryDocumentSnapshot> destinationsSnapshot =
         await Database().fetchDestinations;
@@ -43,10 +47,14 @@ class DestinationViewModel extends GetxController {
             destination.id, destination.data() as Map<String, dynamic>),
       );
     }
+
+    _isLoading = false;
     update();
   }
 
   void filterDestination(String nameDestination) {
+    _isLoading = true;
+
     // Create result variable
     List<DestinationModel> result = [];
 
@@ -66,6 +74,8 @@ class DestinationViewModel extends GetxController {
     }
 
     setFoundDestination = result;
+
+    _isLoading = false;
     update();
   }
 
@@ -86,8 +96,10 @@ class DestinationViewModel extends GetxController {
 
   Future<void> _getAddress() async {
     try {
+      _loading.value = true;
+
       // Get location
-      Position position = await getCurrentLocation;
+      Position position = await _getCurrentPosition();
 
       // Get placemark list from cordinates
       List<Placemark> placemarkList =
@@ -102,6 +114,8 @@ class DestinationViewModel extends GetxController {
 
       // Initialize adrress
       address!.value = place;
+
+      _loading.value = false;
     } catch (e) {
       rethrow;
     }
@@ -110,6 +124,8 @@ class DestinationViewModel extends GetxController {
 
   Future<void> _distanceInKm() async {
     try {
+      _isLoading = true;
+
       // Get data from firestore
       List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
           await Database().fetchDestinations;
@@ -122,7 +138,7 @@ class DestinationViewModel extends GetxController {
 
       // Get location, Calculate distance between and update distance
       for (var value in destinations) {
-        Position position = await getCurrentLocation;
+        Position position = await _getCurrentPosition();
 
         double result = DestinationModel.distanceBetween(position.latitude,
             position.longitude, value.latitude, value.longitude);
@@ -133,6 +149,8 @@ class DestinationViewModel extends GetxController {
           'distance': distance,
         });
       }
+
+      _isLoading = false;
       update();
     } catch (e) {
       rethrow;
@@ -143,8 +161,8 @@ class DestinationViewModel extends GetxController {
   void onInit() {
     _getDestinations();
     setFoundDestination = destinations;
-    getAddress;
-    distanceInKm;
+    _getAddress();
+    _distanceInKm();
     super.onInit();
   }
 }

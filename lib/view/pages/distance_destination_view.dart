@@ -43,11 +43,17 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                 ),
                 Expanded(
                   child: Obx(
-                    () => Text(
-                      controller.address!.value,
-                      style: greenTextStyle.copyWith(fontSize: 12),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    () => controller.loading.value
+                        ? Text(
+                            'Loading ... ',
+                            style: greenTextStyle.copyWith(fontSize: 12),
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : Text(
+                            controller.address!.value,
+                            style: greenTextStyle.copyWith(fontSize: 12),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                   ),
                 ),
               ],
@@ -124,25 +130,30 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
           GetBuilder<DestinationViewModel>(
             init: Get.find<DestinationViewModel>(),
             builder: (_) {
-              return GridView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: defaultMargin,
-                ),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.51,
-                  crossAxisSpacing: 18,
-                ),
-                children: controller.foundDestination
-                    .map(
-                      (e) => DestinationCard(
-                        destination: e,
-                      ),
+              return controller.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
                     )
-                    .toList(),
-              );
+                  : GridView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: defaultMargin,
+                      ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.51,
+                        crossAxisSpacing: 18,
+                      ),
+                      children: controller.foundDestination
+                          .map(
+                            (e) => DestinationCard(
+                              destination: e,
+                            ),
+                          )
+                          .toList(),
+                    );
             },
           ),
         ],
