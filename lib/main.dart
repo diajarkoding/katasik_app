@@ -27,10 +27,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(ControlViewModel());
-    // Get.put(SplashController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: HomePage(),
       getPages: AppPages.routes,
       initialRoute: Routes.homeView,
     );

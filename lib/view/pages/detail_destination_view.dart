@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:katasik_app/core/viewmodel/destination_viewmodel.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
 import 'package:katasik_app/model/destination_model.dart';
 import 'package:katasik_app/view/widgets/facility_item.dart';
 import 'package:katasik_app/view/widgets/photos_item.dart';
 
-class DetailDestinaionView extends StatelessWidget {
+class DetailDestinaionView extends GetView<DestinationViewModel> {
   final DestinationModel destination;
   const DetailDestinaionView({
     Key? key,
@@ -262,128 +264,138 @@ class DetailDestinaionView extends StatelessWidget {
       );
     }
 
-    Widget lineDivider() {
-      return const Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: defaultMargin,
-          vertical: defaultMargin,
-        ),
-        child: Divider(
-          thickness: 1,
-        ),
-      );
-    }
+    // Widget lineDivider() {
+    //   return const Padding(
+    //     padding: EdgeInsets.symmetric(
+    //       horizontal: defaultMargin,
+    //       vertical: defaultMargin,
+    //     ),
+    //     child: Divider(
+    //       thickness: 1,
+    //     ),
+    //   );
+    // }
 
-    Widget contac() {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(
-          defaultMargin,
-          0,
-          defaultMargin,
-          10,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Kontak',
-              style:
-                  blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.416,
-                  height: 80,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: greyColor, width: 1),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Kontak',
-                            style: blackTextStyle,
-                          ),
-                          const Icon(
-                            Icons.phone_in_talk,
-                            size: 18,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Hubungi',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 16,
-                          fontWeight: semiBold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.416,
-                  height: 80,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: greyColor, width: 1),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Instagram',
-                            style: blackTextStyle,
-                          ),
-                          Image.asset(
-                            'assets/icon_instagram.png',
-                            width: 18,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Kunjungi',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 16,
-                          fontWeight: semiBold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    }
+    // Widget contac() {
+    //   return Padding(
+    //     padding: const EdgeInsets.fromLTRB(
+    //       defaultMargin,
+    //       0,
+    //       defaultMargin,
+    //       10,
+    //     ),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         Text(
+    //           'Kontak',
+    //           style:
+    //               blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+    //         ),
+    //         const SizedBox(
+    //           height: 10,
+    //         ),
+    //         Row(
+    //           children: [
+    //             InkWell(
+    //               onTap: () => controller.contactDestination(
+    //                 'tel:${destination.contact['phone']}',
+    //               ),
+    //               child: Container(
+    //                 width: MediaQuery.of(context).size.width * 0.416,
+    //                 height: 80,
+    //                 padding: const EdgeInsets.symmetric(
+    //                   horizontal: 15,
+    //                 ),
+    //                 decoration: BoxDecoration(
+    //                   borderRadius: BorderRadius.circular(10),
+    //                   border: Border.all(color: greyColor, width: 1),
+    //                 ),
+    //                 child: Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   mainAxisAlignment: MainAxisAlignment.center,
+    //                   children: [
+    //                     Row(
+    //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                       children: [
+    //                         Text(
+    //                           'Kontak',
+    //                           style: blackTextStyle,
+    //                         ),
+    //                         const Icon(
+    //                           Icons.phone_in_talk,
+    //                           size: 18,
+    //                         ),
+    //                       ],
+    //                     ),
+    //                     const SizedBox(
+    //                       height: 5,
+    //                     ),
+    //                     Text(
+    //                       'Hubungi',
+    //                       style: blackTextStyle.copyWith(
+    //                         fontSize: 16,
+    //                         fontWeight: semiBold,
+    //                       ),
+    //                     )
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //             const SizedBox(
+    //               width: 20,
+    //             ),
+    //             InkWell(
+    //               onTap: () => controller.contactDestination(
+    //                 destination.contact['ig'],
+    //               ),
+    //               child: Container(
+    //                 width: MediaQuery.of(context).size.width * 0.416,
+    //                 height: 80,
+    //                 padding: const EdgeInsets.symmetric(
+    //                   horizontal: 15,
+    //                 ),
+    //                 decoration: BoxDecoration(
+    //                   borderRadius: BorderRadius.circular(10),
+    //                   border: Border.all(color: greyColor, width: 1),
+    //                 ),
+    //                 child: Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   mainAxisAlignment: MainAxisAlignment.center,
+    //                   children: [
+    //                     Row(
+    //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                       children: [
+    //                         Text(
+    //                           'Instagram',
+    //                           style: blackTextStyle,
+    //                         ),
+    //                         Image.asset(
+    //                           'assets/icon_instagram.png',
+    //                           width: 18,
+    //                         ),
+    //                       ],
+    //                     ),
+    //                     const SizedBox(
+    //                       height: 5,
+    //                     ),
+    //                     Text(
+    //                       'Kunjungi',
+    //                       style: blackTextStyle.copyWith(
+    //                         fontSize: 16,
+    //                         fontWeight: semiBold,
+    //                       ),
+    //                     )
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
 
     Widget content() {
       return Column(
@@ -410,8 +422,8 @@ class DetailDestinaionView extends StatelessWidget {
                 facility(),
                 mapLocation(),
                 mapButton(),
-                lineDivider(),
-                contac(),
+                // lineDivider(),
+                // contac(),
               ],
             ),
           ),

@@ -9,14 +9,12 @@ class DestinationModel {
   final String description;
   final List photos;
   final List facility;
-  final Map contact;
   final double longitude;
   final double latitude;
   final double distance;
 
   DestinationModel({
     required this.id,
-    required this.contact,
     required this.distance,
     required this.longitude,
     required this.latitude,
@@ -41,7 +39,6 @@ class DestinationModel {
         category: json['category'],
         image: json['image'],
         address: json['address'],
-        contact: json['contact'],
         distance: json['distance'],
       );
 
@@ -56,7 +53,6 @@ class DestinationModel {
         'name': name,
         'image': image,
         'address': address,
-        'contact': contact,
       };
 
   static double distanceBetween(

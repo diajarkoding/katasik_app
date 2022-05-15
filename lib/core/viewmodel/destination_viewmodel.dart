@@ -3,6 +3,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/model/destination_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../services/database.dart';
 
@@ -152,6 +153,24 @@ class DestinationViewModel extends GetxController {
 
       _isLoading = false;
       update();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> contactDestination(String url) async {
+    final linkUrl = url;
+    try {
+      if (await canLaunch(linkUrl)) {
+        await launch(
+          url,
+          // Webview in flutter
+
+          // forceSafariVC: true,
+          // forceWebView: true,
+          // enableJavaScript: true,
+        );
+      }
     } catch (e) {
       rethrow;
     }
