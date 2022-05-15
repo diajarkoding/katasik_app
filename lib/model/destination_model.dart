@@ -12,6 +12,7 @@ class DestinationModel {
   final double longitude;
   final double latitude;
   final double distance;
+  final String mapUrl;
 
   DestinationModel({
     required this.id,
@@ -25,22 +26,23 @@ class DestinationModel {
     required this.category,
     required this.image,
     required this.address,
+    required this.mapUrl,
   });
 
   factory DestinationModel.fromJson(String id, Map<String, dynamic> json) =>
       DestinationModel(
-        id: id,
-        longitude: json['longitude'],
-        latitude: json['latitude'],
-        description: json['description'],
-        photos: json['photos'],
-        facility: json['facility'],
-        name: json['name'],
-        category: json['category'],
-        image: json['image'],
-        address: json['address'],
-        distance: json['distance'],
-      );
+          id: id,
+          longitude: json['longitude'],
+          latitude: json['latitude'],
+          description: json['description'],
+          photos: json['photos'],
+          facility: json['facility'],
+          name: json['name'],
+          category: json['category'],
+          image: json['image'],
+          address: json['address'],
+          distance: json['distance'],
+          mapUrl: json['mapUrl']);
 
   Map<String, dynamic> toJson() => {
         'distance': distance,
@@ -53,6 +55,7 @@ class DestinationModel {
         'name': name,
         'image': image,
         'address': address,
+        'mapUrl': mapUrl,
       };
 
   static double distanceBetween(

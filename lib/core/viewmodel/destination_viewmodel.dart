@@ -158,17 +158,12 @@ class DestinationViewModel extends GetxController {
     }
   }
 
-  Future<void> contactDestination(String url) async {
+  Future<void> goToMap(String url) async {
     final linkUrl = url;
     try {
       if (await canLaunch(linkUrl)) {
         await launch(
           url,
-          // Webview in flutter
-
-          // forceSafariVC: true,
-          // forceWebView: true,
-          // enableJavaScript: true,
         );
       }
     } catch (e) {

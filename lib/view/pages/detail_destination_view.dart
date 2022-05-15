@@ -238,7 +238,7 @@ class DetailDestinaionView extends GetView<DestinationViewModel> {
               borderRadius: BorderRadius.circular(17),
             ),
           ),
-          onPressed: () {},
+          onPressed: () => controller.goToMap(destination.mapUrl),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
