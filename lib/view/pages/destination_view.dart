@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
+import 'package:katasik_app/view/widgets/shimmer_loading_card.dart';
 
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../widgets/destination_card.dart';
@@ -122,14 +123,33 @@ class DestinationView extends GetView<DestinationViewModel> {
       );
     }
 
+    Widget shimmerLoading() {
+      return GridView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.51,
+          crossAxisSpacing: 18,
+        ),
+        children: const [
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard()
+        ],
+      );
+    }
+
     Widget gridViewDestinations() {
       return GetBuilder<DestinationViewModel>(
         init: Get.find<DestinationViewModel>(),
         builder: (_) {
           return controller.isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
+              ? shimmerLoading()
               : GridView(
                   padding: const EdgeInsets.symmetric(
                     horizontal: defaultMargin,

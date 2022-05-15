@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/routes/route_name.dart';
 import 'package:katasik_app/view/widgets/destination_carousel_card.dart';
+import 'package:katasik_app/view/widgets/shimmer_loading_carousel_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
 import '../widgets/categories_card.dart';
@@ -126,6 +127,28 @@ class HomeView extends StatelessWidget {
       );
     }
 
+    Widget shimmerLoading() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            const SizedBox(
+              width: defaultMargin,
+            ),
+            Row(
+              children: const [
+                ShimmerLoadingCarouselCard(),
+                SizedBox(
+                  width: defaultMargin,
+                ),
+                ShimmerLoadingCarouselCard(),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget destination() {
       return Column(
         children: [
@@ -163,9 +186,7 @@ class HomeView extends StatelessWidget {
           GetBuilder<DestinationViewModel>(
             init: Get.find<DestinationViewModel>(),
             builder: (controller) => controller.isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                ? shimmerLoading()
                 : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

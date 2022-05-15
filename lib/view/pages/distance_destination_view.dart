@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:katasik_app/view/widgets/shimmer_loading_card.dart';
 import 'package:katasik_app/view/widgets/destination_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
@@ -110,6 +111,27 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
       );
     }
 
+    Widget shimmerLoading() {
+      return GridView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.51,
+          crossAxisSpacing: 18,
+        ),
+        children: const [
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard(),
+          ShimmerLoadingCard()
+        ],
+      );
+    }
+
     Widget gridViewDistanceDestinations() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,9 +153,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
             init: Get.find<DestinationViewModel>(),
             builder: (_) {
               return controller.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
+                  ? shimmerLoading()
                   : GridView(
                       padding: const EdgeInsets.symmetric(
                         horizontal: defaultMargin,
@@ -169,6 +189,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
             children: [
               address(),
               search(),
+              // shimmerLoading(),
               gridViewDistanceDestinations(),
             ],
           ),

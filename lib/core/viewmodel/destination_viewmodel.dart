@@ -49,7 +49,10 @@ class DestinationViewModel extends GetxController {
       );
     }
 
-    _isLoading = false;
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _isLoading = false;
+    });
+
     update();
   }
 
