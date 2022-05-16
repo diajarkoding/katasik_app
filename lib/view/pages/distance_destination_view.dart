@@ -46,7 +46,7 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                   child: Obx(
                     () => controller.loading.value
                         ? Text(
-                            'Loading ... ',
+                            'Mencari lokasi ... ',
                             style: greenTextStyle.copyWith(fontSize: 12),
                             overflow: TextOverflow.ellipsis,
                           )
