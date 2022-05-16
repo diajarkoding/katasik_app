@@ -172,7 +172,11 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                               destination: e,
                             ),
                           )
-                          .toList(),
+                          .toList()
+                        ..sort(
+                          ((a, b) => a.destination.distance
+                              .compareTo(b.destination.distance)),
+                        ),
                     );
             },
           ),
