@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/bindings/about_binding.dart';
 import 'package:katasik_app/helper/bindings/destination_binding.dart';
+import 'package:katasik_app/helper/bindings/nearest_destination_binding.dart';
 import 'package:katasik_app/view/pages/about_view.dart';
-import 'package:katasik_app/view/pages/distance_destination_view.dart';
+import 'package:katasik_app/view/pages/nearest_destination_view.dart';
 import 'package:katasik_app/view/pages/destination_view.dart';
 import 'package:katasik_app/view/pages/home_view.dart';
 import 'package:katasik_app/view/pages/map_view.dart';
@@ -17,7 +18,10 @@ class AppPages {
       name: Routes.homeView,
       page: () => const HomeView(),
       transition: Transition.fadeIn,
-      binding: DestinationBinding(),
+      bindings: [
+        DestinationBinding(),
+        NearestDestinationBinding(),
+      ],
     ),
     GetPage(
       name: Routes.mapView,
@@ -26,11 +30,12 @@ class AppPages {
       binding: MapBinding(),
     ),
     GetPage(
-      name: Routes.distanceDestinationView,
-      page: () => const DistanceDestinationView(),
+      name: Routes.nearestDestinationView,
+      page: () => const NearestDestinationView(),
       transition: Transition.fadeIn,
       bindings: [
         DestinationBinding(),
+        NearestDestinationBinding(),
       ],
     ),
     GetPage(
@@ -44,6 +49,7 @@ class AppPages {
       page: () => const DestinationView(),
       bindings: [
         DestinationBinding(),
+        NearestDestinationBinding(),
       ],
     ),
   ];

@@ -6,8 +6,8 @@ import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
-class DistanceDestinationView extends GetView<DestinationViewModel> {
-  const DistanceDestinationView({Key? key}) : super(key: key);
+class NearestDestinationView extends GetView<DestinationViewModel> {
+  const NearestDestinationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

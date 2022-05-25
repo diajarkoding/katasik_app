@@ -16,7 +16,7 @@ class ControlViewModel extends GetxController {
         Get.offAllNamed(Routes.mapView);
         break;
       case 2:
-        Get.offAllNamed(Routes.distanceDestinationView);
+        Get.offAllNamed(Routes.nearestDestinationView);
         break;
       case 3:
         Get.offAllNamed(Routes.aboutView);
