@@ -28,9 +28,7 @@ class AssetSource extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               name,
-              style: greenTextStyle.copyWith(
-                fontWeight: semiBold,
-              ),
+              style: greenTextStyle.copyWith(),
             ),
           ),
         ],
