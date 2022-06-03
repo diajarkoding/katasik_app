@@ -16,38 +16,64 @@ class HomeView extends StatelessWidget {
     Widget header() {
       return Container(
         margin: const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 0),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Padding(
                     padding: const EdgeInsets.only(bottom: 5),
-                    child: Text(
-                      'Hallo,\nTraveler ..',
-                      style: blackTextStyle.copyWith(
-                          fontSize: 24, fontWeight: semiBold),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hallo,',
+                          style: blackTextStyle.copyWith(
+                              fontSize: 24, fontWeight: semiBold),
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Traveler',
+                            style: greenTextStyle.copyWith(
+                              fontSize: 24,
+                              fontWeight: semiBold,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' ...',
+                                style: blackTextStyle.copyWith(
+                                  fontSize: 24,
+                                  fontWeight: semiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Jelajahi Destinasi Wisata Kab. Tasikmalaya',
-                    style: greyTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: light,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/image_profile.png'),
                 ),
+                InkWell(
+                  onTap: () => Get.toNamed(Routes.destinationView),
+                  child: const Hero(
+                    tag: 'search',
+                    child: Icon(
+                      Icons.search,
+                      size: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              'Jelajahi Destinasi Wisata Kab. Tasikmalaya',
+              style: greyTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: light,
               ),
             ),
           ],
