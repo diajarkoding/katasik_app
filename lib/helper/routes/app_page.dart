@@ -39,11 +39,13 @@ class AppPages {
       ],
     ),
     GetPage(
-      name: Routes.aboutView,
-      page: () => const AboutView(),
-      transition: Transition.fadeIn,
-      binding: AboutBinding(),
-    ),
+        name: Routes.aboutView,
+        page: () => AboutView(),
+        transition: Transition.fadeIn,
+        bindings: [
+          AboutBinding(),
+          DestinationBinding(),
+        ]),
     GetPage(
       name: Routes.destinationView,
       page: () => const DestinationView(),

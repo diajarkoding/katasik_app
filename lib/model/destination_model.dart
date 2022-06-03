@@ -11,12 +11,12 @@ class DestinationModel {
   final List facility;
   final double longitude;
   final double latitude;
-  final double distance;
+  // final double distance;
   final String mapUrl;
 
   DestinationModel({
     required this.id,
-    required this.distance,
+    // required this.distance,
     required this.longitude,
     required this.latitude,
     required this.description,
@@ -41,11 +41,11 @@ class DestinationModel {
           category: json['category'],
           image: json['image'],
           address: json['address'],
-          distance: json['distance'],
+          // distance: json['distance'],
           mapUrl: json['mapUrl']);
 
   Map<String, dynamic> toJson() => {
-        'distance': distance,
+        // 'distance': distance,
         'longitude': longitude,
         'latitude': latitude,
         'description': description,

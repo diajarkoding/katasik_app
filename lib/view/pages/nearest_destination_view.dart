@@ -4,6 +4,7 @@ import 'package:katasik_app/view/widgets/shimmer_loading_card.dart';
 import 'package:katasik_app/view/widgets/destination_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
+import '../../model/destination_model.dart';
 import '../widgets/custom_bottom_navbar_item.dart';
 
 class NearestDestinationView extends GetView<DestinationViewModel> {
@@ -150,11 +151,10 @@ class NearestDestinationView extends GetView<DestinationViewModel> {
             ),
           ),
           GetBuilder<DestinationViewModel>(
-            init: Get.find<DestinationViewModel>(),
             builder: (_) {
               return controller.isLoading
                   ? shimmerLoading()
-                  : GridView(
+                  : GridView.builder(
                       padding: const EdgeInsets.symmetric(
                         horizontal: defaultMargin,
                       ),
@@ -166,17 +166,30 @@ class NearestDestinationView extends GetView<DestinationViewModel> {
                         childAspectRatio: 0.51,
                         crossAxisSpacing: 18,
                       ),
-                      children: controller.foundDestination
-                          .map(
-                            (e) => DestinationCard(
-                              destination: e,
-                            ),
-                          )
-                          .toList()
-                        ..sort(
-                          ((a, b) => a.destination.distance
-                              .compareTo(b.destination.distance)),
-                        ),
+                      itemCount: controller.foundDestination.length,
+                      itemBuilder: (context, index) {
+                        List<DestinationModel> destination =
+                            controller.foundDestination;
+
+                        List<double> distance = controller.listDistance;
+                        //  int index destination.indexWhere((element) => element.id == element.id);
+                        return DestinationCard(
+                          destination: destination[index],
+                          distance: distance[index],
+                        );
+                        // children:
+                        // controller.foundDestination
+                        //     .map(
+                        //       (e) => DestinationCard(
+                        //         destination: e,
+                        //       ),
+                        //     )
+                        //     .toList()
+                        //   ..sort(
+                        //     ((a, b) => a.destination.distance
+                        //         .compareTo(b.destination.distance)),
+                        //   );
+                      },
                     );
             },
           ),
