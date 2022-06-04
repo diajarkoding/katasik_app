@@ -18,6 +18,10 @@ class DestinationViewModel extends GetxController {
 
   final RxBool _loading = false.obs;
 
+  late Position _myLocation;
+
+  Position get myLocation => _myLocation;
+
   bool get isLoading => _isLoading;
 
   RxBool get loading => _loading;
@@ -30,6 +34,10 @@ class DestinationViewModel extends GetxController {
 
   set setFoundDestination(List<DestinationModel> value) {
     _foundDestination = value;
+  }
+
+  set setMyLocation(Position value) {
+    _myLocation = value;
   }
 
   Future<void> _getDestinations() async {
@@ -83,7 +91,7 @@ class DestinationViewModel extends GetxController {
     update();
   }
 
-  Future<Position> _getCurrentPosition() async {
+  Future<void> _getMyLoaction() async {
     try {
       // Request Permission Location
       await Geolocator.requestPermission();
@@ -92,7 +100,7 @@ class DestinationViewModel extends GetxController {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
-      return position;
+      setMyLocation = position;
     } catch (e) {
       rethrow;
     }
@@ -102,12 +110,9 @@ class DestinationViewModel extends GetxController {
     try {
       _loading.value = true;
 
-      // Get location
-      Position position = await _getCurrentPosition();
-
       // Get placemark list from cordinates
-      List<Placemark> placemarkList =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
+      List<Placemark> placemarkList = await placemarkFromCoordinates(
+          myLocation.latitude, myLocation.longitude);
 
       // Get placemark
       Placemark placemark = placemarkList[0];
@@ -142,10 +147,8 @@ class DestinationViewModel extends GetxController {
 
       // Get location, Calculate distance between and update distance
       for (var value in destinations) {
-        Position position = await _getCurrentPosition();
-
-        double result = DestinationModel.distanceBetween(position.latitude,
-            position.longitude, value.latitude, value.longitude);
+        double result = DestinationModel.distanceBetween(myLocation.latitude,
+            myLocation.longitude, value.latitude, value.longitude);
 
         double distance = result / 1000;
 
@@ -175,11 +178,12 @@ class DestinationViewModel extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
+    super.onInit();
+    await _getMyLoaction();
     _getDestinations();
     setFoundDestination = destinations;
     _getAddress();
     _distanceInKm();
-    super.onInit();
   }
 }
