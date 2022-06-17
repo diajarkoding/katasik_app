@@ -8,12 +8,13 @@ import '../../helper/constans/theme.dart';
 class DestinationCard extends StatelessWidget {
   final DestinationModel destination;
   final bool isDestinaionView;
+  final double distance;
   // final String text;
 
   const DestinationCard({
     Key? key,
     this.isDestinaionView = false,
-    // this.text = 'Jarak 0 Km',
+    this.distance = 0.0,
     required this.destination,
   }) : super(key: key);
 
@@ -72,7 +73,7 @@ class DestinationCard extends StatelessWidget {
                     bottom: 5,
                   ),
                   child: Text(
-                    'Jarak ${destination.distance.toStringAsFixed(0)} Km',
+                    'Jarak ${distance.toStringAsFixed(0)} Km',
                     style: greenTextStyle.copyWith(
                       fontWeight: semiBold,
                     ),

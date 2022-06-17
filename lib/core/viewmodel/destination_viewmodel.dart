@@ -18,6 +18,8 @@ class DestinationViewModel extends GetxController {
 
   final RxBool _loading = false.obs;
 
+  List<double> listDistance = [];
+
   bool get isLoading => _isLoading;
 
   RxBool get loading => _loading;
@@ -126,6 +128,41 @@ class DestinationViewModel extends GetxController {
     update();
   }
 
+  // Future<void> _distanceInKm() async {
+  //   try {
+  //     _isLoading = true;
+
+  //     // Get data from firestore
+  //     List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
+  //         await Database.fetchDestinations;
+
+  //     // Parsing JSON destinationSnapshot
+  //     var destinations = destinationSnapshot.map(
+  //       (e) =>
+  //           DestinationModel.fromJson(e.id, e.data() as Map<String, dynamic>),
+  //     );
+
+  //     // Get location, Calculate distance between and update distance
+  //     for (var value in destinations) {
+  //       Position position = await _getCurrentPosition();
+
+  //       double result = DestinationModel.distanceBetween(position.latitude,
+  //           position.longitude, value.latitude, value.longitude);
+
+  //       double distance = result / 1000;
+
+  //       Database.destionationRef.doc(value.id).update({
+  //         'distance': distance,
+  //       });
+  //     }
+
+  //     _isLoading = false;
+  //     update();
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
   Future<void> _distanceInKm() async {
     try {
       _isLoading = true;
@@ -149,9 +186,7 @@ class DestinationViewModel extends GetxController {
 
         double distance = result / 1000;
 
-        Database.destionationRef.doc(value.id).update({
-          'distance': distance,
-        });
+        listDistance.add(distance);
       }
 
       _isLoading = false;
@@ -178,6 +213,9 @@ class DestinationViewModel extends GetxController {
   void onInit() {
     _getDestinations();
     setFoundDestination = destinations;
+    listDistance.sort(((a, b) {
+      return a.compareTo(b);
+    }));
     _getAddress();
     _distanceInKm();
     super.onInit();

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/core/viewmodel/about_viewmodel.dart';
+import 'package:katasik_app/core/viewmodel/destination_viewmodel.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
 import 'package:katasik_app/view/widgets/asset_source.dart';
 
 import '../widgets/custom_bottom_navbar_item.dart';
 
 class AboutView extends GetView<AboutViewModel> {
-  const AboutView({Key? key}) : super(key: key);
+  AboutView({Key? key}) : super(key: key);
+  final destinationViewModel = Get.find<DestinationViewModel>();
 
   @override
   Widget build(BuildContext context) {
