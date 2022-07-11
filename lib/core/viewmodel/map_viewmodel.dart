@@ -61,7 +61,10 @@ class MapViewModel extends GetxController {
 
     // Convert / Parsing JSON destinationSnapshot to DestinationModel
     var destinations = destinationSnapshot.map(
-      (e) => DestinationModel.fromJson(e.id, e.data() as Map<String, dynamic>),
+      (e) => DestinationModel.fromJson(
+        e.id,
+        e.data() as Map<String, dynamic>,
+      ),
     );
 
     // add latitude and longitude from destinations to listLatLang

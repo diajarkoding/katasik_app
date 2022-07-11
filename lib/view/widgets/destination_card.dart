@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:katasik_app/model/destination_model.dart';
-import 'package:katasik_app/view/pages/detail_destination_view.dart';
-
+import '../../core/viewmodel/destination_viewmodel.dart';
 import '../../helper/constans/theme.dart';
 
 class DestinationCard extends StatelessWidget {
-  final DestinationModel destination;
+  final Function() onTap;
   final bool isDestinaionView;
-  // final String text;
+  final double distance;
+  final String imageUrl;
+  final String name;
+  final String address;
+  final String category;
 
-  const DestinationCard({
+  DestinationCard({
     Key? key,
     this.isDestinaionView = false,
-    // this.text = 'Jarak 0 Km',
-    required this.destination,
+    required this.onTap,
+    required this.distance,
+    required this.imageUrl,
+    required this.name,
+    required this.address,
+    required this.category,
   }) : super(key: key);
+
+  final controller = Get.put(DestinationViewModel());
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(DistanceDestinationViewModel());
     return InkWell(
-      onTap: () => Get.to(
-        () => DetailDestinaionView(
-          destination: destination,
-        ),
-      ),
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +37,7 @@ class DestinationCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(destination.image),
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -54,7 +57,7 @@ class DestinationCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Text(
-                  destination.category,
+                  category,
                   style: blackTextStyle.copyWith(
                     fontSize: 11,
                   ),
@@ -72,7 +75,7 @@ class DestinationCard extends StatelessWidget {
                     bottom: 5,
                   ),
                   child: Text(
-                    'Jarak ${destination.distance.toStringAsFixed(0)} Km',
+                    'Jarak ${distance.toStringAsFixed(0)} Km',
                     style: greenTextStyle.copyWith(
                       fontWeight: semiBold,
                     ),
@@ -81,7 +84,7 @@ class DestinationCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: Text(
-              destination.name,
+              name,
               style: blackTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -89,7 +92,7 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
           Text(
-            destination.address,
+            address,
             style: blackTextStyle.copyWith(
               fontSize: 12,
               fontWeight: reguler,

@@ -4,6 +4,7 @@ import 'package:katasik_app/helper/bindings/destination_binding.dart';
 import 'package:katasik_app/view/pages/about_view.dart';
 import 'package:katasik_app/view/pages/distance_destination_view.dart';
 import 'package:katasik_app/view/pages/destination_view.dart';
+import 'package:katasik_app/view/pages/handle_location.dart';
 import 'package:katasik_app/view/pages/home_view.dart';
 import 'package:katasik_app/view/pages/map_view.dart';
 
@@ -46,5 +47,13 @@ class AppPages {
         DestinationBinding(),
       ],
     ),
+    GetPage(
+      name: Routes.handleLocation,
+      page: () => const HandleLocation(),
+    )
+    //   bindings: [
+    //     DestinationBinding(),
+    //   ],
+    // ),
   ];
 }

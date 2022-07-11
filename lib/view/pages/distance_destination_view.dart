@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:katasik_app/view/pages/detail_destination_view.dart';
 import 'package:katasik_app/view/widgets/shimmer_loading_card.dart';
 import 'package:katasik_app/view/widgets/destination_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
@@ -166,16 +167,37 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                         childAspectRatio: 0.51,
                         crossAxisSpacing: 18,
                       ),
-                      children: controller.foundDestination
-                          .map(
-                            (e) => DestinationCard(
-                              destination: e,
+                      // children: controller.foundDestination
+                      //     .map(
+                      //       (e) => DestinationCard(
+                      //         destination: e,
+                      //         // distance: controller.listDistance[],
+                      //       ),
+                      //     )
+                      //     .toList()
+                      //   ..sort(
+                      //     ((a, b) => a.destination.distance
+                      //         .compareTo(b.destination.distance)),
+                      //   ),
+                      children: controller.foundDestination.map(
+                        (e) {
+                          int index = controller.foundDestination.indexWhere(
+                            (element) => element.id == e.id,
+                          );
+                          return DestinationCard(
+                            onTap: () => Get.to(
+                              () => DetailDestinaionView(destination: e),
                             ),
-                          )
-                          .toList()
+                            distance: controller.listDistance[index],
+                            imageUrl: e.image,
+                            name: e.name,
+                            address: e.address,
+                            category: e.category,
+                          );
+                        },
+                      ).toList()
                         ..sort(
-                          ((a, b) => a.destination.distance
-                              .compareTo(b.destination.distance)),
+                          ((a, b) => a.distance.compareTo(b.distance)),
                         ),
                     );
             },

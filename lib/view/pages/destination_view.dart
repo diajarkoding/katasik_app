@@ -5,6 +5,7 @@ import 'package:katasik_app/view/widgets/shimmer_loading_card.dart';
 
 import '../../core/viewmodel/destination_viewmodel.dart';
 import '../widgets/destination_card.dart';
+import 'detail_destination_view.dart';
 
 class DestinationView extends GetView<DestinationViewModel> {
   const DestinationView({Key? key}) : super(key: key);
@@ -161,14 +162,24 @@ class DestinationView extends GetView<DestinationViewModel> {
                     childAspectRatio: 0.57,
                     crossAxisSpacing: 18,
                   ),
-                  children: controller.foundDestination
-                      .map(
-                        (e) => DestinationCard(
-                          isDestinaionView: true,
-                          destination: e,
+                  children: controller.foundDestination.map(
+                    (e) {
+                      return DestinationCard(
+                        onTap: () => Get.to(
+                          () => DetailDestinaionView(destination: e),
                         ),
-                      )
-                      .toList(),
+                        distance: 0.0,
+                        imageUrl: e.image,
+                        name: e.name,
+                        address: e.address,
+                        category: e.category,
+                        isDestinaionView: true,
+                      );
+                    },
+                  ).toList()
+                    ..sort(
+                      ((a, b) => a.name.compareTo(b.name)),
+                    ),
                 );
         },
       );

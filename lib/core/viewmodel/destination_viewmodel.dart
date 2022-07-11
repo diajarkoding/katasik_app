@@ -8,6 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../services/database.dart';
 
 class DestinationViewModel extends GetxController {
+  List<double> listDistance = [];
+
   final List<DestinationModel> _destinations = [];
 
   List<DestinationModel> _foundDestination = [];
@@ -18,9 +20,9 @@ class DestinationViewModel extends GetxController {
 
   final RxBool _loading = false.obs;
 
-  late Position _myLocation;
+  Position? _myLocation;
 
-  Position get myLocation => _myLocation;
+  Position? get myLocation => _myLocation;
 
   bool get isLoading => _isLoading;
 
@@ -39,6 +41,51 @@ class DestinationViewModel extends GetxController {
   set setMyLocation(Position value) {
     _myLocation = value;
   }
+
+  // Map<String, dynamic>? deterMine;
+
+  // Future<Map<String, dynamic>> determinePosition() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     return {'error': true, 'message': 'Layanan Lokasi dinonaktifkan'};
+  //   }
+
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.deniedForever) {
+  //     return {
+  //       'error': true,
+  //       'message':
+  //           'Izin lokasi ditolak secara permanen. kami tidak dapat meminta izin'
+  //     };
+  //   }
+
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+
+  //     if (permission == LocationPermission.whileInUse &&
+  //         permission == LocationPermission.always) {
+  //       return {'error': true, 'message': 'Izin lokasi ditolak'};
+  //     }
+  //     return {'error': true, 'message': 'Izin lokasi ditolak'};
+  //   }
+
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   return {
+  //     'position': position,
+  //     'error': false,
+  //     'message': 'Posisi berhasil di ambil'
+  //   };
+  // }
+
+  // Future<void> deterjen() async {
+  //   Map<String, dynamic> response = await determinePosition();
+  //   deterMine = response;
+  //   update();
+  // }
 
   Future<void> _getDestinations() async {
     _isLoading = true;
@@ -91,20 +138,48 @@ class DestinationViewModel extends GetxController {
     update();
   }
 
+  Future<Position> determinePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return position;
+  }
+
   Future<void> _getMyLoaction() async {
     try {
+      _isLoading = true;
       // Request Permission Location
-      await Geolocator.requestPermission();
+      // await Geolocator.requestPermission();
 
       // Get Position
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+      Position position = await determinePosition();
+
+      _isLoading = false;
 
       setMyLocation = position;
+
+      update();
     } catch (e) {
       rethrow;
     }
   }
+
+  // Future<void> _getMyLoaction2() async {
+  //   try {
+  //     Map<String, dynamic> response = await determinePosition();
+
+  //     if (!response['error']) {
+  //       setMyLocation = response['position'];
+  //       update();
+  //       print(response['message']);
+  //       Get.snackbar('Berhasil', response['message']);
+  //     } else {
+  //       print(response['message']);
+  //       Get.snackbar('Terjadi Kesalahan', response['message']);
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> _getAddress() async {
     try {
@@ -112,7 +187,7 @@ class DestinationViewModel extends GetxController {
 
       // Get placemark list from cordinates
       List<Placemark> placemarkList = await placemarkFromCoordinates(
-          myLocation.latitude, myLocation.longitude);
+          myLocation!.latitude, myLocation!.longitude);
 
       // Get placemark
       Placemark placemark = placemarkList[0];
@@ -131,6 +206,39 @@ class DestinationViewModel extends GetxController {
     update();
   }
 
+  // Future<void> _distanceInKm() async {
+  //   try {
+  //     _isLoading = true;
+
+  //     // Get data from firestore
+  //     List<QueryDocumentSnapshot<Object?>> destinationSnapshot =
+  //         await Database.fetchDestinations;
+
+  //     // Parsing JSON destinationSnapshot
+  //     var destinations = destinationSnapshot.map(
+  //       (e) =>
+  //           DestinationModel.fromJson(e.id, e.data() as Map<String, dynamic>),
+  //     );
+
+  //     // Get location, Calculate distance between and update distance
+  //     for (var value in destinations) {
+  //       double result = DestinationModel.distanceBetween(myLocation!.latitude,
+  //           myLocation!.longitude, value.latitude, value.longitude);
+
+  //       double distance = result / 1000;
+
+  //       Database.destionationRef.doc(value.id).update({
+  //         'distance': distance,
+  //       });
+  //     }
+
+  //     _isLoading = false;
+  //     update();
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
   Future<void> _distanceInKm() async {
     try {
       _isLoading = true;
@@ -147,14 +255,14 @@ class DestinationViewModel extends GetxController {
 
       // Get location, Calculate distance between and update distance
       for (var value in destinations) {
-        double result = DestinationModel.distanceBetween(myLocation.latitude,
-            myLocation.longitude, value.latitude, value.longitude);
+        // Position position = await _getCurrentPosition();
+
+        double result = DestinationModel.distanceBetween(myLocation!.latitude,
+            myLocation!.longitude, value.latitude, value.longitude);
 
         double distance = result / 1000;
 
-        Database.destionationRef.doc(value.id).update({
-          'distance': distance,
-        });
+        listDistance.add(distance);
       }
 
       _isLoading = false;

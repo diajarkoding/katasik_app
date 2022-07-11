@@ -14,24 +14,27 @@ class AssetSource extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10),
-      child: Row(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 5),
-            child: Icon(
-              Icons.radio_button_checked,
-              size: 15,
+      padding: const EdgeInsets.only(
+        left: 10,
+        bottom: 15,
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        child: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: Icon(
+                Icons.radio_button_checked,
+                size: 14,
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: onPressed,
-            child: Text(
+            Text(
               name,
               style: greenTextStyle.copyWith(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

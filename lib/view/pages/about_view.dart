@@ -61,6 +61,9 @@ class AboutView extends GetView<AboutViewModel> {
                 fontWeight: semiBold,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             AssetSource(
               name: 'Google Maps',
               onPressed: () {
