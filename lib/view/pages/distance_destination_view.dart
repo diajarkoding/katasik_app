@@ -167,18 +167,6 @@ class DistanceDestinationView extends GetView<DestinationViewModel> {
                         childAspectRatio: 0.51,
                         crossAxisSpacing: 18,
                       ),
-                      // children: controller.foundDestination
-                      //     .map(
-                      //       (e) => DestinationCard(
-                      //         destination: e,
-                      //         // distance: controller.listDistance[],
-                      //       ),
-                      //     )
-                      //     .toList()
-                      //   ..sort(
-                      //     ((a, b) => a.destination.distance
-                      //         .compareTo(b.destination.distance)),
-                      //   ),
                       children: controller.foundDestination.map(
                         (e) {
                           int index = controller.foundDestination.indexWhere(

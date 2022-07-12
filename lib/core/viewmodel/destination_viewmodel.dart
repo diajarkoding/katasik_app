@@ -139,6 +139,10 @@ class DestinationViewModel extends GetxController {
   }
 
   Future<Position> determinePosition() async {
+    // Request Permission Location
+    await Geolocator.requestPermission();
+
+    // Get Location / Position
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     return position;
@@ -146,18 +150,10 @@ class DestinationViewModel extends GetxController {
 
   Future<void> _getMyLoaction() async {
     try {
-      _isLoading = true;
-      // Request Permission Location
-      // await Geolocator.requestPermission();
-
       // Get Position
       Position position = await determinePosition();
 
-      _isLoading = false;
-
       setMyLocation = position;
-
-      update();
     } catch (e) {
       rethrow;
     }
@@ -255,8 +251,6 @@ class DestinationViewModel extends GetxController {
 
       // Get location, Calculate distance between and update distance
       for (var value in destinations) {
-        // Position position = await _getCurrentPosition();
-
         double result = DestinationModel.distanceBetween(myLocation!.latitude,
             myLocation!.longitude, value.latitude, value.longitude);
 
