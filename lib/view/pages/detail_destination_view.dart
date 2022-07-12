@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:katasik_app/core/viewmodel/destination_viewmodel.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
 import 'package:katasik_app/model/destination_model.dart';
+import 'package:katasik_app/view/pages/show_image.dart';
 import 'package:katasik_app/view/widgets/facility_item.dart';
 import 'package:katasik_app/view/widgets/photos_item.dart';
 
@@ -143,6 +144,10 @@ class DetailDestinaionView extends GetView<DestinationViewModel> {
                       .map(
                         (e) => PhotosItem(
                           imageUrl: e,
+                          onPressed: () => Get.to(
+                            () => ShowImage(photos: e),
+                            // transition: Transition.fadeIn,
+                          ),
                         ),
                       )
                       .toList(),

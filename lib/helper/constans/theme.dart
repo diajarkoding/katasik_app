@@ -5,6 +5,7 @@ const Color whiteColor = Color(0xffFFFFFF);
 const Color blackColor = Color(0xff222222);
 const Color greyColor = Color(0xffBEBFCA);
 const Color greenColor = Color(0xff138F87);
+const Color darkGrey = Color(0xff0a0a0a);
 
 final TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor);
 final TextStyle greenTextStyle = GoogleFonts.poppins(color: greenColor);

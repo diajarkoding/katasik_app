@@ -58,7 +58,7 @@ class CustomBottomNavBarItem extends StatelessWidget {
               BottomNavigationBarItem(
                 label: '',
                 icon: Icon(
-                  Icons.settings,
+                  Icons.info_outline,
                   size: 26,
                   color: mainPageC.currentIndex.value == 3
                       ? blackColor
