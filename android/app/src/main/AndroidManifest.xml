@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.katasik_app">
    <application
-        android:label="katasik_app"
+        android:label="KaTasik"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
@@ -40,6 +40,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
 
 
     
