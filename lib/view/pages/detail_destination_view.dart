@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:katasik_app/core/viewmodel/destination_viewmodel.dart';
 import 'package:katasik_app/helper/constans/theme.dart';
 import 'package:katasik_app/model/destination_model.dart';
-import 'package:katasik_app/view/pages/show_image.dart';
+import 'package:katasik_app/view/pages/photo_view.dart';
 import 'package:katasik_app/view/widgets/facility_item.dart';
 import 'package:katasik_app/view/widgets/photos_item.dart';
 
@@ -132,29 +132,50 @@ class DetailDestinaionView extends GetView<DestinationViewModel> {
           const SizedBox(
             height: 6,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Row(
-                  children: destination.photos
-                      .map(
-                        (e) => PhotosItem(
-                          imageUrl: e,
-                          onPressed: () => Get.to(
-                            () => ShowImage(photos: e),
-                            // transition: Transition.fadeIn,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ],
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [
+          //       const SizedBox(
+          //         width: 20,
+          //       ),
+          //       Row(
+          //         children: destination.photos
+          //             .map(
+          //               (e) => PhotosItem(
+          //                 imageUrl: e,
+          //                 onPressed: () => Get.to(
+          //                   () => PhotoView(photos: destination.photos),
+          //                   // transition: Transition.fadeIn,
+          //                 ),
+          //               ),
+          //             )
+          //             .toList(),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          SizedBox(
+            height: 120,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              // physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: destination.photos.length,
+              itemBuilder: (context, index) {
+                return PhotosItem(
+                  imageUrl: destination.photos[index],
+                  leftMargin: index == 0 ? 16 : 0,
+                  onPressed: () => Get.to(
+                    () => PhotoView(
+                      photos: destination.photos,
+                      index: index,
+                    ),
+                  ),
+                );
+              },
             ),
-          ),
+          )
         ],
       );
     }

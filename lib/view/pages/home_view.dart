@@ -13,6 +13,23 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // List categoryList = [
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_mountain.png', 'title': 'Agrowisata'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
+    //   CategoriesCard(image: 'assets/icon_mountain.png', title: 'Gunung'),
+    //   CategoriesCard(image: 'assets/icon_agrowisata.png', title: 'Agrowisata'),
+    //   CategoriesCard(image: 'assets/icon_budaya.png', title: 'Budaya'),
+    //   CategoriesCard(image: 'assets/icon_edukasi.png', title: 'Edukasi'),
+    //   CategoriesCard(image: 'assets/icon_religi.png', title: 'Religi'),
+    //   CategoriesCard(image: 'assets/icon_sungai.png', title: 'Sungai'),
+    // ];
+
     Widget header() {
       return Container(
         margin: const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 0),

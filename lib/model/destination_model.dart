@@ -58,6 +58,10 @@ class DestinationModel {
         'mapUrl': mapUrl,
       };
 
+  static _toRadians(double degree) {
+    return degree * pi / 180;
+  }
+
   static double distanceBetween(
     double startLatitude,
     double startLongitude,
@@ -77,9 +81,5 @@ class DestinationModel {
     var d = sqrt((x * x) + (y * y)) * earthRadius;
 
     return d;
-  }
-
-  static _toRadians(double degree) {
-    return degree * pi / 180;
   }
 }

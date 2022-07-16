@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class PhotosItem extends StatelessWidget {
   final String imageUrl;
   final Function() onPressed;
-  const PhotosItem({required this.imageUrl, Key? key, required this.onPressed}) : super(key: key);
+  final double leftMargin;
+  const PhotosItem(
+      {required this.imageUrl,
+      Key? key,
+      required this.onPressed,
+      required this.leftMargin})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,7 @@ class PhotosItem extends StatelessWidget {
       child: Container(
         width: 150,
         height: 120,
-        margin: const EdgeInsets.only(right: 16),
+        margin: EdgeInsets.only(right: 16, left: leftMargin),
         decoration: BoxDecoration(
           image:
               DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
