@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:katasik_app/helper/routes/route_name.dart';
+import 'package:katasik_app/view/pages/category_view.dart';
 import 'package:katasik_app/view/widgets/destination_carousel_card.dart';
 import 'package:katasik_app/view/widgets/shimmer_loading_carousel_card.dart';
 import '../../core/viewmodel/destination_viewmodel.dart';
@@ -13,22 +14,15 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List categoryList = [
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_mountain.png', 'title': 'Agrowisata'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   {'image': 'assets/icon_forest.png', 'title': 'Hutan'},
-    //   CategoriesCard(image: 'assets/icon_mountain.png', title: 'Gunung'),
-    //   CategoriesCard(image: 'assets/icon_agrowisata.png', title: 'Agrowisata'),
-    //   CategoriesCard(image: 'assets/icon_budaya.png', title: 'Budaya'),
-    //   CategoriesCard(image: 'assets/icon_edukasi.png', title: 'Edukasi'),
-    //   CategoriesCard(image: 'assets/icon_religi.png', title: 'Religi'),
-    //   CategoriesCard(image: 'assets/icon_sungai.png', title: 'Sungai'),
-    // ];
+    List categoryList = [
+      {'image': 'assets/icon_beach.png', 'title': 'Pantai'},
+      {'image': 'assets/icon_mountain.png', 'title': 'Gunung'},
+      {'image': 'assets/icon_agrowisata.png', 'title': 'Agrowisata'},
+      {'image': 'assets/icon_budaya.png', 'title': 'Budaya'},
+      {'image': 'assets/icon_edukasi.png', 'title': 'Edukasi'},
+      {'image': 'assets/icon_religi.png', 'title': 'Religi'},
+      {'image': 'assets/icon_sungai.png', 'title': 'Sungai'},
+    ];
 
     Widget header() {
       return Container(
@@ -140,25 +134,40 @@ class HomeView extends StatelessWidget {
                   width: defaultMargin,
                 ),
                 Row(
-                  children: const [
-                    CategoriesCard(
-                        image: 'assets/icon_beach.png', title: 'Pantai'),
-                    CategoriesCard(
-                        image: 'assets/icon_forest.png', title: 'Hutan'),
-                    CategoriesCard(
-                        image: 'assets/icon_mountain.png', title: 'Gunung'),
-                    CategoriesCard(
-                        image: 'assets/icon_agrowisata.png',
-                        title: 'Agrowisata'),
-                    CategoriesCard(
-                        image: 'assets/icon_budaya.png', title: 'Budaya'),
-                    CategoriesCard(
-                        image: 'assets/icon_edukasi.png', title: 'Edukasi'),
-                    CategoriesCard(
-                        image: 'assets/icon_religi.png', title: 'Religi'),
-                    CategoriesCard(
-                        image: 'assets/icon_sungai.png', title: 'Sungai'),
-                  ],
+                  children: categoryList
+                      .map(
+                        (e) => InkWell(
+                          onTap: () {
+                            Get.to(CategoryView(
+                              category: e['title'],
+                            ));
+                          },
+                          child: CategoriesCard(
+                            image: e['image'],
+                            title: e['title'],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  // children: const [
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_beach.png', title: 'Pantai'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_forest.png', title: 'Hutan'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_mountain.png', title: 'Gunung'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_agrowisata.png',
+                  //       title: 'Agrowisata'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_budaya.png', title: 'Budaya'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_edukasi.png', title: 'Edukasi'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_religi.png', title: 'Religi'),
+                  //   CategoriesCard(
+                  //       image: 'assets/icon_sungai.png', title: 'Sungai'),
+                  // ],
                 ),
                 const SizedBox(
                   width: 4,
@@ -244,6 +253,7 @@ class HomeView extends StatelessWidget {
                                   destination: e,
                                 ),
                               )
+                              .take(4)
                               .toList(),
                         ),
                       ],

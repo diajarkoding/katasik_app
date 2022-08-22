@@ -14,6 +14,8 @@ class DestinationViewModel extends GetxController {
 
   List<DestinationModel> _foundDestination = [];
 
+  List<DestinationModel> _destiByCategory = [];
+
   final RxString? _address = RxString('');
 
   bool _isLoading = false;
@@ -34,9 +36,7 @@ class DestinationViewModel extends GetxController {
 
   List<DestinationModel> get foundDestination => _foundDestination;
 
-  set setFoundDestination(List<DestinationModel> value) {
-    _foundDestination = value;
-  }
+  List<DestinationModel> get destiByCategory => _destiByCategory;
 
   set setMyLocation(Position value) {
     _myLocation = value;
@@ -132,7 +132,27 @@ class DestinationViewModel extends GetxController {
           .toList();
     }
 
-    setFoundDestination = result;
+    _foundDestination = result;
+
+    _isLoading = false;
+    update();
+  }
+
+  void filterByCategory(String category) {
+    // Create result variable
+    List<DestinationModel> result = [];
+
+    // Condition category is empety
+
+    result = destinations
+        .where(
+          (element) => element.category.toString().toLowerCase().contains(
+                category.toLowerCase(),
+              ),
+        )
+        .toList();
+
+    _destiByCategory = result;
 
     _isLoading = false;
     update();
@@ -284,8 +304,9 @@ class DestinationViewModel extends GetxController {
     super.onInit();
     await _getMyLoaction();
     _getDestinations();
-    setFoundDestination = destinations;
+    _foundDestination = destinations;
     _getAddress();
     _distanceInKm();
+    // filterDestination('gunung');
   }
 }
